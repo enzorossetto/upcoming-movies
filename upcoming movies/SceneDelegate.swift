@@ -1,8 +1,8 @@
 //
 //  SceneDelegate.swift
-//  upcoming movies
+//  LearningUIKit
 //
-//  Created by Enzo Rossetto on 18/03/24.
+//  Created by Enzo Rossetto on 14/03/24.
 //
 
 import UIKit
@@ -16,7 +16,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        window = UIWindow(windowScene: windowScene)
+        
+        let moviesViewController = UIStoryboard(
+            name: "Main",
+            bundle: nil
+        ).instantiateViewController(withIdentifier: "MoviesVC")
+        
+        let navigationController = UINavigationController(rootViewController: moviesViewController)
+        navigationController.navigationBar.prefersLargeTitles = true
+        
+        window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
